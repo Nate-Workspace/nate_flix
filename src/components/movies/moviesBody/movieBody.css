@@ -1,0 +1,111 @@
+.mbody-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.2rem;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  align-items: stretch; /* To make The elements fit the height of the row*/
+  padding-bottom: 10rem;
+  scrollbar-width: none;
+}
+.mbody-wrapper.routes{
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+.mbody-container.routes{
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  padding: 0;
+  padding-bottom: 2rem;
+  flex: 1;
+  width: 100%;
+}
+
+
+/* ---------------------- */
+.m-body-card{
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  height: 100%;
+  transition: all 200ms ease-in;
+  /* background: #100f14;
+  border-radius: 10px; */
+}
+.m-body-card:hover{
+  cursor: pointer;
+  scale: 1.02;
+}
+.m-cardImage{
+  flex: 1;
+  transition: all 300ms ease-in;
+}
+.m-cardImage img{
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+.m-cardDetails{
+  padding: 0 3%;
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  transition: all 300ms ease-in;
+}
+/* .m-body-card:hover .m-cardDetails{
+  transform: translateY(-70px);
+} */
+.m-cardTitle{
+  font-size: .93rem;
+  font-weight: 500;
+  max-height: 3.2rem; /* Approximate height for two lines */
+  line-height: 1.2rem; /* Adjust based on font size */
+  overflow: hidden; /* Hide overflowing text */
+  display: -webkit-box; /* Enable line clamping */
+  -webkit-line-clamp: 2; /* Limit to two lines */
+  -webkit-box-orient: vertical; /* Vertical text flow */
+  text-overflow: ellipsis; /* Add "..." for truncated text */
+  scrollbar-width: none;
+}
+/* Title scroll */
+.m-cardTitle:hover {
+  overflow-y: auto; /* Enable vertical scrolling on hover */
+  text-overflow: unset; /* Remove ellipsis when scrolling */
+}
+.m-rating{
+  color: var(--yellow);
+}
+
+/* ---------------------------------------------------- */
+
+/* Slide buttons: */
+.slide-buttons{
+  gap: 1rem;
+}
+.swipers{
+  padding: .5rem 1rem;
+  background-color: rgb(16, 86, 146);
+  border-radius: 10px;
+}
+.swipers.disabled{
+  background-color: rgb(24, 39, 51);
+  color: rgb(199, 198, 197);
+}
+.swipers.last{
+  background-color: rgb(24, 39, 51);
+  color: rgb(199, 198, 197);
+}
+
+
+@media (min-width: 1536px){
+  .mbody-container.routes{
+    max-width: 100% !important; 
+  }
+}

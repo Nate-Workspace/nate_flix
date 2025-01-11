@@ -1,0 +1,30 @@
+.sd-container{
+    background-color: aliceblue;
+    width: 100%;
+    color: black;
+    gap: 1.5rem;
+}
+.links{
+    gap: 1.5rem;
+}
+.showItem{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+}
+.keyContent{
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+.keywordItem{
+    padding: .3rem .7rem;
+    background-color: brown;
+    border-radius: 5px;
+}
+.sd-container hr{
+    width: 100%;          /* Sets the width of the line */
+    height: 1px;         /* Adjusts the thickness of the line */
+    background-color: black; /* Sets the line color */
+    border: none;
+}

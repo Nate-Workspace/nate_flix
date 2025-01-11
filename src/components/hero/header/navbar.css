@@ -1,0 +1,60 @@
+.nav-container{
+    justify-content: space-between;
+    z-index: 5;
+    padding: 1rem 1rem .7rem;
+}
+.nav-right{
+    flex: 1;
+    justify-content: flex-end;
+    gap: 3rem;
+}
+
+/* Nav middle--------------------- */
+.nav-middle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+.nav-middle span{
+    font-size: 1.1rem;
+    transition: all 200ms ease-in;
+    font-weight: 300;
+}
+.nav-middle span.active{
+    scale: 1.1;
+    font-weight: 600;
+    transition: all 200ms ease-in;
+}
+.nav-middle span.active::after{
+    width: 20%;
+    background: var(--red);
+}
+.nav-middle span:hover{
+   cursor: pointer;
+}
+.nav-middle span::after{
+    content: "";
+  width: 0%;
+  height: 2px;
+  background-color: white;
+  display: block;
+  margin: auto;
+  transition: 0.5s;
+}
+.nav-middle span:hover::after{
+    width: 100%;
+}
+/* -------------------------------------- */
+
+/* Nav searchbar----------------------- */
+
+.nav-logo{
+    width: 8rem;
+}
+.nav-wrapper hr{
+    width: 100%;
+    border-color: var(--secondary);
+    position: relative;
+    z-index: 5;
+}

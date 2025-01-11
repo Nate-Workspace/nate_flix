@@ -1,0 +1,18 @@
+.f-wrapper{
+    background: black;
+}
+.f-container{
+    justify-content: space-between;
+}
+.f-left{
+    gap: 1rem;
+}
+.f-navigation{
+    margin-top: 1rem;
+    gap: 1.3rem;
+}
+.f-navigation a{
+    font-size: .9rem;
+    font-weight: 600;
+}
+

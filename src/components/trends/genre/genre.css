@@ -1,0 +1,52 @@
+.genre-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  overflow: scroll;
+  height: max-content;
+  scroll-behavior: smooth;
+  width: 95%;
+  box-sizing: border-box;
+}
+.genre-container.routes{
+  width: 100%;
+  padding-top: 0;
+  padding-bottom: 3%;
+  justify-content: start;
+  gap: 1rem;
+}
+.genre-container::-webkit-scrollbar {
+  display: none; /*Hides the scrollbar in others*/
+}
+.button {
+  border-radius: 5px;
+  background: var(--secondaryShape);
+  padding: 0.2rem 1.3rem;
+  white-space: nowrap;
+  transition: all 200ms ease-in;
+}
+.button:hover {
+  cursor: pointer;
+}
+.button.true{
+  background: var(--red);
+}
+
+
+/* This is canceled for the Router genres---------------------------- */
+
+@media (min-width: 1536px){
+  .genre-container.routes{
+    max-width: 100%;
+  }
+}
+/* @media (min-width: 1536px) {
+  .genre-wrapper{
+    margin: 1rem;
+  }
+  .genre-container{
+    max-width: 78%;
+    margin: auto;
+  }
+} */

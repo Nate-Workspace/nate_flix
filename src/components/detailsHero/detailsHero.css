@@ -1,0 +1,96 @@
+.dh-wrapper{
+    z-index: 5;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+}
+.dh-container{
+    gap: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    z-index: 5;
+    height: 50vh;
+}
+
+/* Code for the image */
+.dh-left{
+    width:20%;
+    height: 25rem;
+    z-index: 5;
+}
+.dh-left img{
+    width: 100%;
+    height: 100%;
+}
+.dh-right{
+    gap: 1.2rem;
+    z-index: 5;
+}
+
+/* Code for the right texts */
+.dh-header-Name span:nth-child(2){
+    font-size: 2rem;
+    color: var(--secondary);
+}
+.dh-header-smallName{
+    gap: 1rem;
+    font-size: 1rem;
+}
+
+/* Code for the rating */
+.dh-rating span:nth-child(1){
+    /* font-size: 1.2rem; */
+}
+.dh-rating span:nth-child(2){
+    color: var(--yellow);
+    font-size: 1.2rem;
+}
+
+/* For the buttons */
+.dh-buttons{
+    gap: 2rem;
+}
+.dh-buttons span{
+    background-color: rgb(16, 86, 146);
+    padding: 10px;
+    border-radius: 100%;
+    transition: all 200ms ease-in;
+}
+.dh-buttons span:hover{
+    cursor: pointer;
+}
+
+/* For the overview */
+.dh-overview span:nth-child(1){
+    font-size: 1.3rem;
+    color: var(--red);
+    font-weight: 600;
+}
+.dh-overview span:nth-child(2){
+    width: 80%;
+    font-weight: 200;
+}
+.dh-roles{
+    gap: 5rem;
+}
+.dh-role-item span:nth-child(1){
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--primary-color); /* Change the underline color */
+    text-decoration-thickness: 2px; /* Thickness of the underline */
+    text-underline-offset: 4px; /* Distance between the text and the underline */
+}
+.dh-role-item span:nth-child(2){
+    font-weight: 300;
+    transition: all 200ms ease-in;
+}
+.dh-role-item span:nth-child(2):hover{
+    cursor: pointer;
+    color: rgb(128, 128, 128);
+}
+
+/* .dh-wrapper{
+    background:linear-gradient(to left, rgba(0,0,0,0.5), #000307),url(r3.png);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+} */

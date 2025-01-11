@@ -1,0 +1,19 @@
+.movies-tab{
+    gap: 20rem;
+    padding-bottom: 1.5rem;
+}
+.movies{
+    display: flex;
+    gap: .7rem;
+    color: var(--secondary);
+    transition: all 200ms ease-in;
+}
+.movies:hover{
+    cursor: pointer;
+    color: var(--red);
+}
+.movies.active{
+    color: white;
+    scale: 1.1;
+    font-weight: 600;
+}

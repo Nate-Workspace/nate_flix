@@ -1,0 +1,16 @@
+.search-bar{
+    background: var(--searchBarColor);
+    color: var(--secondary);
+    border-radius: 20px;
+    padding: .2rem 1.2rem;
+    width: 27%;
+    gap: 1rem;
+}
+.search-bar input{
+    width: 100%;
+    outline: none;
+    cursor: text;
+}
+.search-bar input:focus::placeholder{
+    color: transparent;
+}

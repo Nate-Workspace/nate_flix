@@ -1,0 +1,106 @@
+.tbody-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Adjust spacing between items */
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  padding: 2rem 0;
+  width: 95%;
+  height: 24.5rem;
+  scrollbar-width: none;
+  align-items: stretch;
+}
+.tbody-container::-webkit-scrollbar {
+  display: none; /*Hides the scrollbar in others*/
+}
+
+
+ /* CSS for the cards-------------------------- */
+.tbody-card{
+  height: 100%;
+  width: 11rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 0 0 auto;
+  transition: all 300ms ease-in;
+  background: #100f14;
+  border-radius: 10px;
+}
+.tbody-card:hover{
+  cursor: pointer;
+  scale: 1.03;
+}
+.cardImage{
+  flex: 1;
+  height: 65%;
+}
+.cardImage img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cardDetails{
+  height: 26%;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 0 3%;
+}
+.cardTitle{
+  font-size: .93rem;
+  font-weight: 350;
+  max-height: 3rem; /* Approximate height for two lines */
+  line-height: 1.1rem; /* Adjust based on font size */
+  overflow: hidden; /* Hide overflowing text */
+  display: -webkit-box; /* Enable line clamping */
+  -webkit-line-clamp: 2; /* Limit to two lines */
+  -webkit-box-orient: vertical; /* Vertical text flow */
+  text-overflow: ellipsis; /* Add "..." for truncated text */
+  scrollbar-width: none;
+}
+/* Title scroll */
+.cardTitle:hover {
+  overflow-y: auto; /* Enable vertical scrolling on hover */
+  text-overflow: unset; /* Remove ellipsis when scrolling */
+}
+.rating{
+  color: var(--yellow);
+}
+/* ------------------------------------------- */
+
+
+@media (min-width: 1536px) {
+  .t-wrapper{
+    margin: 1rem;
+  }
+  .tbody-container{
+    max-width: 76.5%;
+    margin: auto;
+  }
+}
+/* @media (min-width: 1636px) {
+  .tbody-container {
+    max-width: 1420px;
+    margin: auto;
+  }
+}
+@media (min-width: 1736px) {
+  .tbody-container {
+    max-width: 1520px;
+    margin: auto;
+  }
+}
+@media (min-width: 1836px) {
+  .tbody-container {
+    max-width: 1620px;
+    margin: auto;
+  }
+}
+@media (min-width: 1936px) {
+  .tbody-container {
+    max-width: 1780px;
+    margin: auto;
+  }
+} */

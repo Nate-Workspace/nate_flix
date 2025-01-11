@@ -1,0 +1,10 @@
+.app{
+    background: var(--background);
+    color: #fff;
+    /* padding-bottom: 3rem */
+}
+.app hr{
+    border-color: var(--secondary);
+    width: 100%;
+    opacity: 50%;
+}

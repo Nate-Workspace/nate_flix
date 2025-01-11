@@ -1,0 +1,11 @@
+.detailsBody{
+    align-items: start;
+    justify-content: space-between;
+}
+.db-left{
+    width: 70%;
+}
+.db-right{
+    width: 28%;
+    padding-top: 2.5rem;
+}
