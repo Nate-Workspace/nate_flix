@@ -21,7 +21,7 @@ const Navbar = () => {
     <div className="w-full flex flex-col nav-wrapper">
       <div className=" innerWidth paddings flexStart nav-container">
         <div className="nav-logo">
-          <img src="./NATEflix.png" alt="logo" />
+          <img src="/NATEflix.png" alt="logo" onClick={()=> onNavClick("Home")}/>
         </div>
         <div className=" flexBetween nav-right">
 

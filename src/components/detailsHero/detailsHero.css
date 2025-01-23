@@ -1,25 +1,32 @@
 .dh-wrapper{
     z-index: 5;
-    padding-bottom: 2rem;
-    padding-top: 1rem;
+    padding-bottom: 4rem;
+    padding-top: 2rem;
+    border: none; /* Remove borders */
+    box-shadow: none; /* Remove any box shadow */
 }
 .dh-container{
     gap: 3rem;
-    padding-top: 3rem;
-    padding-bottom: 2rem;
+    padding-bottom: 0;
+    padding-top: 1rem;
     z-index: 5;
-    height: 50vh;
+    max-height: max-content;
+    overflow-y: hidden;
 }
 
 /* Code for the image */
 .dh-left{
-    width:20%;
-    height: 25rem;
+    min-width:20%;
+    max-width: 20%;
+    min-height: 70%;
+    max-height: 70%;
     z-index: 5;
 }
 .dh-left img{
-    width: 100%;
-    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    min-width: 100%;
 }
 .dh-right{
     gap: 1.2rem;
@@ -66,7 +73,7 @@
     font-weight: 600;
 }
 .dh-overview span:nth-child(2){
-    width: 80%;
+    width: 60%;
     font-weight: 200;
 }
 .dh-roles{
@@ -87,10 +94,3 @@
     cursor: pointer;
     color: rgb(128, 128, 128);
 }
-
-/* .dh-wrapper{
-    background:linear-gradient(to left, rgba(0,0,0,0.5), #000307),url(r3.png);
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat;
-} */

@@ -22,6 +22,7 @@ function App() {
           <Route path="/mylist" element={<MyList />} />
           <Route path="/details" element={<Details/>} />
           <Route path="/movie/:id" element={<Details/>} />
+          <Route path="/tv/:id" element={<Details/>} />
         </Routes>
         <Footer/>
       </div>

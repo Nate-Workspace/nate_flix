@@ -2,7 +2,15 @@
   width: 100%;
   overflow: hidden; /* Ensures no overflow issues */
   padding-bottom: 2rem;
+  padding-top: 2rem;
 }
+.ph-wrapper hr {
+  width: 100%;
+  border: none; 
+  border-top: 2px solid var(--secondary); 
+  margin: 2rem 0; 
+}
+
 
 .ph-title {
   font-size: 1.5rem;

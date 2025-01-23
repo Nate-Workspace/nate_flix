@@ -22,9 +22,10 @@
 .button {
   border-radius: 5px;
   background: var(--secondaryShape);
-  padding: 0.2rem 1.3rem;
+  padding: 0.1rem 1.3rem;
   white-space: nowrap;
   transition: all 200ms ease-in;
+  font-size: 0.95rem;
 }
 .button:hover {
   cursor: pointer;

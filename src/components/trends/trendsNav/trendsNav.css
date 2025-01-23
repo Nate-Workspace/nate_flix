@@ -1,5 +1,6 @@
 .trends-container{
     padding-top: 3rem;
+    padding-bottom: 0;
 }
 .trend-tabs{
     justify-content: space-between;
@@ -9,8 +10,6 @@
     justify-content: center;
     align-items: center;
     gap: .7rem;
-}
-.item{
     cursor: pointer;
     color: var(--secondary);
     transition: all 200ms ease-in;

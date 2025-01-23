@@ -15,7 +15,7 @@ const SearchBar = () => {
 
   return (
     <div className="flexStart search-bar">
-      <FaSearch size={18} />
+      <FaSearch size={15} />
       <input
         type="text"
         placeholder="Search a movie"

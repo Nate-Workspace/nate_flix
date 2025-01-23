@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./details.css";
 import DhWrapped from "../../components/detailsHero/DhWrapped";
 import PeopleHorisontal from "../../components/peopleHorisontal/PeopleHorisontal";

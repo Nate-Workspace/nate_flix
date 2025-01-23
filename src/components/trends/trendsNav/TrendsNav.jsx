@@ -19,7 +19,7 @@ const TrendsNav = () => {
       <div className="innerWidth paddings trends-container">
         <div className=" flexCenter trend-tabs">
           <div className={`item ${trendsNavValue== "Trending" ? "active": ""}`} onClick={()=> onNavClick("Trending")}>
-            <FaArrowTrendUp size={20} />
+            <FaArrowTrendUp size={14} />
             <span>Trending</span>
           </div>
           <div className={`item ${trendsNavValue== "Popular" ? "active": ""}`} onClick={()=> onNavClick("Popular")}>

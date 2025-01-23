@@ -17,6 +17,10 @@ const MovieBody = (props) => {
     getSeriesByGenre,
     getMoviesByGenre,
     genreIDsProvider,
+    getDetailsData,
+    setMovieId,
+    getCast,
+    getSimilarMovies,
   } = useMovieFetchContext();
   const { moviesNavValue, setMoviesNavValue } = useTrendsContext();
   const [moviesRender, setMoviesRender] = useState([]);
@@ -39,6 +43,8 @@ const MovieBody = (props) => {
       setMoviesNavValue("Series");
     }
   }, [location.pathname]);
+
+  console.log(moviesNavValue)
 
   //For fetching the data for regular movies and series------------
   useEffect(() => {
@@ -96,8 +102,6 @@ const MovieBody = (props) => {
     setPageNumber(1)
   },[genreIDsProvider])
 
-  console.log(pageNumber);
-
   //Checking if the current slide is the last slide and Making the genre arrows functionality-------------
   useEffect(()=>{
     if(moviesRender.length<20 && moviesRender.length>0){
@@ -110,8 +114,20 @@ const MovieBody = (props) => {
   
   // On each movie click-------------------- For the DETAILS page!!!!
   const onMovieClick=(id)=>{
+    if(moviesNavValue=="Movies"){
     console.log('onMovieClick')
+    getDetailsData(`/movie/${id}`)
+    setMovieId(id)
+    getCast(`/movie/${id}`)
+    getSimilarMovies(`/movie/${id}`)
     navigate(`/movie/${id}`);
+  } else if(moviesNavValue=="Series"){
+    getDetailsData(`/tv/${id}`)
+    setMovieId(id)
+    getCast(`/tv/${id}`)
+    getSimilarMovies(`/tv/${id}`)
+    navigate(`/tv/${id}`);
+  }
   }
 
   //Adding a loading state----------
@@ -133,11 +149,11 @@ const MovieBody = (props) => {
       >
         {moviesRender.map((each) => {
           return (
-            <div className="m-body-card" onClick={()=>onMovieClick(each.id)}key={each.id}>
+            <div className="m-body-card" onClick={()=>onMovieClick(each.id)} key={each.id}>
               <div className="m-cardImage">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${each.poster_path}`}
-                  alt="movie"
+                  alt="Poster unavailable"
                 />
               </div>
 

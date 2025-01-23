@@ -1,3 +1,6 @@
-.sort-container{
-    gap: 1rem;
+.sort-container {
+  gap: 1rem;
+  padding-bottom: 0rem;
+  padding-top: 0rem;
 }
+

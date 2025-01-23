@@ -1,6 +1,7 @@
 .movies-tab{
     gap: 20rem;
     padding-bottom: 1.5rem;
+    padding-top: 2.5rem;
 }
 .movies{
     display: flex;
