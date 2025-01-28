@@ -40,6 +40,7 @@ const Login = () => {
       if (result.user) {
         console.log("Login successful, showing alert");
         window.alert("Login successful");
+        navigate(`/`)
       }
     } catch (error) {
       console.error("Error with Google login:", error.message);

@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
 import { useTrendsContext } from "../../contexts/TrendsContextProvider";
 import { collection, deleteDoc,doc, addDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
 
 const DetailsHero = () => {
   const { detailsData, getDetailsData, cast } = useMovieFetchContext();
@@ -73,6 +73,19 @@ const DetailsHero = () => {
     setSaveState(newSaveState);
   
     if (newSaveState) {
+      console.log({
+        title: detailsData.name || detailsData.title,
+        poster_path: detailsData.poster_path,
+        movie_id: detailsData.id,
+        rating: detailsData.vote_average,
+        release_date:
+          locationArray[1] === "movie"
+            ? detailsData.release_date
+            : detailsData.first_air_date,
+        type: locationArray[1],
+        user_id: auth?.currentUser?.uid,
+      });
+      
       try {
         await addDoc(savedCollectionRef, {
           title: detailsData.name || detailsData.title,
@@ -84,6 +97,7 @@ const DetailsHero = () => {
               ? detailsData.release_date
               : detailsData.first_air_date,
           type: locationArray[1],
+          user_id: auth?.currentUser?.uid,
         });
         console.log("Saved successfully");
         getSavedMovies();
