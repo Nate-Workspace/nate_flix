@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./detailsHero.css";
 import { FaHeart } from "react-icons/fa";
-import { FaBookmark } from "react-icons/fa";
+import { FaBookmark,FaRegBookmark } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
+import { useTrendsContext } from "../../contexts/TrendsContextProvider";
+import { collection, deleteDoc,doc, addDoc } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 const DetailsHero = () => {
   const { detailsData, getDetailsData, cast } = useMovieFetchContext();
   const [formattedGenres, setFormattedGenres] = useState([]);
   const location = useLocation();
+  //Save state:
+  const {saveState, setSaveState,getSavedMovies, savedMovies}= useTrendsContext()
+  const savedCollectionRef= collection(db, 'saved');
 
   const locationArray= location.pathname.split('/');
-
-  // useEffect(() => {
-  //   getDetailsData(location.pathname);
-  // }, [location.pathname]);
 
   useEffect(() => {
     if (detailsData && detailsData.genres) {
@@ -49,6 +51,69 @@ const DetailsHero = () => {
   const mainActors = cast?.cast?.slice(0, 2).map((each) => each.name) || [];
 
   console.log(detailsData)
+
+
+  //Save Functionality:------------------------------------------------------------------
+  useEffect(() => {
+    if (!savedMovies || savedMovies.length === 0) {
+      getSavedMovies(); // Fetch only if not already fetched
+    }
+  
+    const isAlreadySaved = savedMovies.some(
+      (each) => each.movie_id == locationArray[2] && each.type == locationArray[1]
+    );
+  
+    console.log("Is already saved:", isAlreadySaved);
+    setSaveState(isAlreadySaved);
+  }, [locationArray, savedMovies.length]); // Avoid infinite loop
+  
+
+  const onSaveClick = async () => {
+    const newSaveState = !saveState;
+    setSaveState(newSaveState);
+  
+    if (newSaveState) {
+      try {
+        await addDoc(savedCollectionRef, {
+          title: detailsData.name || detailsData.title,
+          poster_path: detailsData.poster_path,
+          movie_id: detailsData.id,
+          rating: detailsData.vote_average,
+          release_date:
+            locationArray[1] === "movie"
+              ? detailsData.release_date
+              : detailsData.first_air_date,
+          type: locationArray[1],
+        });
+        console.log("Saved successfully");
+        getSavedMovies();
+      } catch (err) {
+        console.error("Error saving to Firebase:", err);
+      }
+    } else {
+      const thisMovie = savedMovies.find(
+        (each) => each.movie_id.toString() === locationArray[2] && each.type === locationArray[1]
+      );
+  
+      console.log(thisMovie);
+  
+      if (thisMovie) {
+        try {
+          await deleteDoc(doc(db, "saved", thisMovie.id)); // Assuming "id" is the Firebase document ID
+          console.log("Deleted successfully");
+          getSavedMovies(); 
+        } catch (err) {
+          console.error("Error deleting from Firebase:", err);
+        }
+      }
+    }
+  };
+  
+
+  useEffect(()=>{
+    console.log(saveState)
+  },[])
+  
 
   return (
     <div className="dh-wrapper">
@@ -94,8 +159,9 @@ const DetailsHero = () => {
             <span>
               <FaHeart size={15} />
             </span>
-            <span>
-              <FaBookmark size={15} />
+            <span onClick={onSaveClick}>
+              {saveState== true? <FaBookmark size={17} /> : <FaRegBookmark size={17} />}
+              
             </span>
           </div>
 

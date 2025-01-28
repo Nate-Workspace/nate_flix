@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 export const TrendsContext = createContext();
 export const useTrendsContext = () => {
@@ -13,6 +15,9 @@ const TrendsContextProvider = ({ children }) => {
   const [moviesNavValue, setMoviesNavValue] = useState("Movies");
   console.log(moviesNavValue);
 
+  //Saving state
+  const [saveState, setSaveState]= useState(false)
+
  
  
   //Getting the genre list from the api:--------------------
@@ -25,6 +30,26 @@ const TrendsContextProvider = ({ children }) => {
       .then((response) => response.json())
       .then((data) => setGenreList(data.genres));
   };
+
+  // ######################## SAVING CONTEXT LOGIC---------------------------------------------------------------------------
+  const savedCollectionRef = collection(db, "saved");
+
+  // Getting the saved data:
+  const [savedMovies, setSavedMovies]= useState([])
+  const getSavedMovies = async () => {
+    try {
+      const data = await getDocs(savedCollectionRef);
+      const filteredData = data.docs.map((each) => ({
+        ...each.data(),
+        id: each.id,
+      }));
+      setSavedMovies(filteredData);
+      console.log(filteredData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
     
   return (
     <TrendsContext.Provider
@@ -36,6 +61,11 @@ const TrendsContextProvider = ({ children }) => {
         genreList,
         setGenreList,
         getGenreList,
+        saveState,
+        setSaveState,
+        savedMovies,
+        getSavedMovies,
+        setSavedMovies
       }}
     >
       {children}
