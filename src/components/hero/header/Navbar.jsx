@@ -1,61 +1,117 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./navbar.css";
 import SearchBar from "../../../separateComps/searchBar/SearchBar";
 import { useNavigate, useLocation } from "react-router-dom";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../config/firebase";
 
 const Navbar = () => {
-  const navigate= useNavigate()
-  const location = useLocation()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    // Listen to auth state changes
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   const onNavClick = (active) => {
-    if(active=="Home"){
-      navigate('/')
-    }else{
-    navigate(`/${active.toLowerCase()}`)
-  }
+    if (active === "Home") {
+      navigate("/");
+    } else {
+      navigate(`/${active.toLowerCase()}`);
+    }
   };
 
-  // console.log(activeNav);
+  const onLogin = (active) => {
+    if (active === "Login") {
+      navigate(`/login`);
+    } else if (active === "Sign Up") {
+      navigate(`/signup`);
+    }
+  };
+
+  const onLogOut = async () => {
+    try {
+      await signOut(auth);
+      window.alert("You have successfully logged out.");
+    } catch (e) {
+      console.error("Error during logout:", e);
+    }
+  };
+
   return (
     <div className="w-full flex flex-col nav-wrapper">
-      <div className=" innerWidth paddings flexStart nav-container">
+      <div className="innerWidth paddings flexStart nav-container">
         <div className="nav-logo">
-          <img src="/NATEflix.png" alt="logo" onClick={()=> onNavClick("Home")}/>
+          <img
+            src="/NATEflix.png"
+            alt="logo"
+            onClick={() => onNavClick("Home")}
+          />
         </div>
-        <div className=" flexBetween nav-right">
-
-          {/* Navigation buttons---------------------- */}
+        <div className="flexBetween nav-right">
+          {/* Navigation buttons */}
           <div className="nav-middle">
             <span
               onClick={() => onNavClick("Home")}
-              className={`${location.pathname == "/" ? "active" : ""}`}
+              className={`${location.pathname === "/" ? "active" : ""}`}
             >
               Home
             </span>
             <span
               onClick={() => onNavClick("Movies")}
-              className={`${location.pathname == "/movies" ? "active" : ""}`}
+              className={`${location.pathname === "/movies" ? "active" : ""}`}
             >
               Movies
             </span>
             <span
               onClick={() => onNavClick("Series")}
-              className={`${location.pathname == "/series" ? "active" : ""}`}
+              className={`${location.pathname === "/series" ? "active" : ""}`}
             >
               Series
             </span>
             <span
               onClick={() => onNavClick("Mylist")}
-              className={`${location.pathname == "/mylist" ? "active" : ""}`}
+              className={`${location.pathname === "/mylist" ? "active" : ""}`}
             >
               My list
             </span>
           </div>
-          {/* Navigation buttons------------------------ */}
 
-          <SearchBar/>
-          <div className="red-button">Log in</div>
+          <SearchBar />
+          <div className="auth-buttons flex gap-2">
+            {!currentUser && !auth.currentUser && (
+              <>
+                <div
+                  className="red-button"
+                  onClick={() => onLogin("Login")}
+                >
+                  Login
+                </div>
+                <div
+                  className="gray-button bg-gray-500"
+                  onClick={() => onLogin("Sign Up")}
+                >
+                  Sign up
+                </div>
+              </>
+            )}
+            {currentUser && auth.currentUser &&(
+              <div
+                className="gray-button bg-gray-500"
+                onClick={onLogOut}
+              >
+                Log out
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <hr />

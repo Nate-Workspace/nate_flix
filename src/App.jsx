@@ -8,6 +8,8 @@ import Footer from "./components/footer/Footer";
 import MovieFetchProvider from "./contexts/movieFetchProvider";
 import TrendsContextProvider from "./contexts/TrendsContextProvider";
 import Details from "./pages/details/Details";
+import SignUp from "./components/auth/SignUp";
+import Login from "./components/auth/Login";
 
 function App() {
   return (
@@ -20,9 +22,10 @@ function App() {
           <Route path="/movies" element={<Movies />}/>
           <Route path="/series" element={<Series />} />
           <Route path="/mylist" element={<MyList />} />
-          <Route path="/details" element={<Details/>} />
           <Route path="/movie/:id" element={<Details/>} />
           <Route path="/tv/:id" element={<Details/>} />
+          <Route path="/signup" element={<SignUp/>} />
+          <Route path="/login" element={<Login/>} />
         </Routes>
         <Footer/>
       </div>
