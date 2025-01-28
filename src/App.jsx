@@ -10,6 +10,8 @@ import TrendsContextProvider from "./contexts/TrendsContextProvider";
 import Details from "./pages/details/Details";
 import SignUp from "./components/auth/SignUp";
 import Login from "./components/auth/Login";
+import PublicRoute from "./components/auth/PublicRoute";
+import NotFound from "./components/auth/NotFound";
 
 function App() {
   return (
@@ -24,8 +26,13 @@ function App() {
           <Route path="/mylist" element={<MyList />} />
           <Route path="/movie/:id" element={<Details/>} />
           <Route path="/tv/:id" element={<Details/>} />
-          <Route path="/signup" element={<SignUp/>} />
-          <Route path="/login" element={<Login/>} />
+
+          {/* Protected routing */}
+          <Route path="/signup" element={<PublicRoute><SignUp/></PublicRoute>} />
+          <Route path="/login" element={<PublicRoute><Login/></PublicRoute>} />
+
+          {/* Page not found routing */}
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
         <Footer/>
       </div>

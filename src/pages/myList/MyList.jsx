@@ -4,15 +4,27 @@ import { getDocs, collection } from "firebase/firestore";
 import { useTrendsContext } from "../../contexts/TrendsContextProvider";
 import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../config/firebase";
 
 const MyList = () => {
   const {savedMovies, getSavedMovies} = useTrendsContext();
   const {getDetailsData, setMovieId,getCast, getSimilarMovies}= useMovieFetchContext()
   const navigate= useNavigate();
+  const [savedUserMovies, setSavedUserMovies]= useState([]);
 
   useEffect(() => {
     getSavedMovies();
   }, []);
+
+  useEffect(() => {
+    if (savedMovies && auth?.currentUser) {
+      const userMovies = savedMovies.filter(each => each.user_id === auth.currentUser.uid);
+      setSavedUserMovies(userMovies);
+    }
+    if(!auth.currentUser){
+      setSavedUserMovies([])
+    }
+  }, [savedMovies, auth?.currentUser]);
 
   //On movie Click---------------
   const onMovieClick=(id, type)=>{
@@ -23,6 +35,8 @@ const MyList = () => {
     getSimilarMovies(`/${type}/${id}`)
     navigate(`/${type}/${id}`);
   }
+
+  console.log(savedUserMovies)
 
   return (
     <div>
@@ -35,7 +49,7 @@ const MyList = () => {
             <div
               className={` innerWidth paddings flexCenter mbody-container`}
             >
-              {savedMovies.map((each) => {
+              {savedUserMovies.map((each) => {
                 return (
                   <div className="m-body-card" onClick={()=> onMovieClick(each.movie_id, each.type)} key={each.id}>
                     <div className="m-cardImage">

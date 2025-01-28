@@ -55,20 +55,25 @@ const DetailsHero = () => {
 
   //Save Functionality:------------------------------------------------------------------
   useEffect(() => {
-    if (!savedMovies || savedMovies.length === 0) {
-      getSavedMovies(); // Fetch only if not already fetched
+    if (!auth.currentUser || !savedMovies) {
+      setSaveState(false); // Reset save state if no user is logged in
+      return;
     }
   
     const isAlreadySaved = savedMovies.some(
-      (each) => each.movie_id == locationArray[2] && each.type == locationArray[1]
+      (each) =>
+        each.movie_id == locationArray[2] &&
+        each.type == locationArray[1] &&
+        each.user_id === auth.currentUser.uid
     );
   
-    console.log("Is already saved:", isAlreadySaved);
     setSaveState(isAlreadySaved);
-  }, [locationArray, savedMovies.length]); // Avoid infinite loop
+  }, [auth.currentUser, savedMovies, locationArray]); // Add auth.currentUser to the dependency array
+  
   
 
   const onSaveClick = async () => {
+    
     const newSaveState = !saveState;
     setSaveState(newSaveState);
   
@@ -106,7 +111,7 @@ const DetailsHero = () => {
       }
     } else {
       const thisMovie = savedMovies.find(
-        (each) => each.movie_id.toString() === locationArray[2] && each.type === locationArray[1]
+        (each) => each.movie_id.toString() === locationArray[2] && each.type === locationArray[1] && each.user_id === auth?.currentUser?.uid
       );
   
       console.log(thisMovie);

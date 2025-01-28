@@ -5,10 +5,12 @@ import SearchBar from "../../../separateComps/searchBar/SearchBar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../config/firebase";
+import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const {setSaveState, setSavedMovies}= useTrendsContext()
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -40,6 +42,8 @@ const Navbar = () => {
   const onLogOut = async () => {
     try {
       await signOut(auth);
+      setSaveState(false); 
+      setSavedMovies([]);
       window.alert("You have successfully logged out.");
     } catch (e) {
       console.error("Error during logout:", e);
