@@ -15,16 +15,20 @@ const SignUp = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       console.log("User signed in successfully");
+      toast.success("Login Sucessfull")
     } catch (e) {
       console.error(e);
+      toast.error("Something went wrong")
     }
   };
 
   const signInWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
+      toast.success("Login Sucessfull")
     } catch (e) {
       console.error(e);
+      toast.error("Something went wrong")
     }
   };
 

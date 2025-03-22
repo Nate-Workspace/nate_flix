@@ -2,14 +2,9 @@
     align-items: start;
     justify-content: center;
     gap: 5rem;
-    padding-top: 5%;
-}
-.s-route-filter{
-    width:18%;
-    height: 40rem;
-    background-color: aliceblue;
+    padding-top: 3%;
 }
 .s-route-right{
     /* flex: 1; */
-    width: 72%;
+    width: 100%;
 }

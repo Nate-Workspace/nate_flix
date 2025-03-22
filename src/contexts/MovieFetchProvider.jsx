@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import axios from "axios";
 
 export const MoviesFetchContext = createContext();
 
@@ -126,6 +127,23 @@ export const MovieFetchProvider = ({ children }) => {
     .then(response=>response.json())
     .then(data=> setSimilarMovies(data.results))
   }
+
+  //SEARCH FUNCTIONALITY--------------------------------------
+  const searchMovies = async (query) => {
+    try {
+      const response = await axios.get(`https://api.themoviedb.org/3/search/multi`, {
+        params: {
+          api_key: apiKey,
+          query: query,
+          include_adult: false,
+        },
+      });
+      return response.data.results; 
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      return [];
+    }
+  };
   
   return (
     <MoviesFetchContext.Provider
@@ -156,6 +174,7 @@ export const MovieFetchProvider = ({ children }) => {
         setMovieId,
         getSimilarMovies,
         similarMovies,
+        searchMovies,
       }}
     >
       {children}

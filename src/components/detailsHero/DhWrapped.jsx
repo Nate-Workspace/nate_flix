@@ -17,7 +17,7 @@ const DhWrapped = () => {
     <div className='wrapper-hero'>
       <img src={`https://image.tmdb.org/t/p/w500${detailsData?.backdrop_path}`} className="dh-image" alt="" />
       <div className="dh-shadow"></div>
-      <Navbar />
+      <Navbar className="z-10"/>
       <DetailsHero/>
     </div>
   )

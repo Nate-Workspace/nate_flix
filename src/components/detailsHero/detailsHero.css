@@ -94,3 +94,42 @@
     cursor: pointer;
     color: rgb(128, 128, 128);
 }
+
+/* For the trailer component */
+.trailer-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .trailer-content {
+    position: relative;
+    width: 80%;
+    max-width: 900px;
+  }
+  
+  .trailer-content iframe {
+    width: 100%;
+    height: 500px;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    background: white;
+    color: black;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+  }
+  

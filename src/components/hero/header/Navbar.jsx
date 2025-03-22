@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../config/firebase";
 import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -26,7 +27,13 @@ const Navbar = () => {
   const onNavClick = (active) => {
     if (active === "Home") {
       navigate("/");
-    } else {
+    } else if(active== "Mylist"){
+      if(!auth?.currentUser?.uid){
+        toast.error("You are not logged in!")
+        navigate("/login")
+      }
+    } 
+    else {
       navigate(`/${active.toLowerCase()}`);
     }
   };
@@ -44,9 +51,10 @@ const Navbar = () => {
       await signOut(auth);
       setSaveState(false); 
       setSavedMovies([]);
-      window.alert("You have successfully logged out.");
+      toast.success("You have successfully logged out.");
     } catch (e) {
       console.error("Error during logout:", e);
+      toast.error("Something went wrong")
     }
   };
 

@@ -5,6 +5,7 @@ import { useTrendsContext } from "../../contexts/TrendsContextProvider";
 import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebase";
+import toast from "react-hot-toast";
 
 const MyList = () => {
   const {savedMovies, getSavedMovies} = useTrendsContext();
@@ -12,6 +13,8 @@ const MyList = () => {
   const navigate= useNavigate();
   const [savedUserMovies, setSavedUserMovies]= useState([]);
 
+
+  
   useEffect(() => {
     getSavedMovies();
   }, []);

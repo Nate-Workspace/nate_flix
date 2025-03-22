@@ -3,19 +3,26 @@ import "./detailsHero.css";
 import { FaHeart } from "react-icons/fa";
 import { FaBookmark,FaRegBookmark } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
 import { useTrendsContext } from "../../contexts/TrendsContextProvider";
 import { collection, deleteDoc,doc, addDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
+import {toast} from 'react-hot-toast'
+import Trailer from "../iframe/Trailer";
 
 const DetailsHero = () => {
   const { detailsData, getDetailsData, cast } = useMovieFetchContext();
   const [formattedGenres, setFormattedGenres] = useState([]);
   const location = useLocation();
+  const navigate= useNavigate()
   //Save state:
   const {saveState, setSaveState,getSavedMovies, savedMovies}= useTrendsContext()
   const savedCollectionRef= collection(db, 'saved');
+
+  // For the trailer
+  const [trailerKey, setTrailerKey] = useState(null);
+  const [isTrailerOpen, setIsTrailerOpen] = useState(false);
 
   const locationArray= location.pathname.split('/');
 
@@ -73,24 +80,16 @@ const DetailsHero = () => {
   
 
   const onSaveClick = async () => {
-    
+    if(!auth?.currentUser?.uid){
+      toast.error("You are not logged in!")
+      return null
+    }
     const newSaveState = !saveState;
     setSaveState(newSaveState);
-  
+
+
+    
     if (newSaveState) {
-      console.log({
-        title: detailsData.name || detailsData.title,
-        poster_path: detailsData.poster_path,
-        movie_id: detailsData.id,
-        rating: detailsData.vote_average,
-        release_date:
-          locationArray[1] === "movie"
-            ? detailsData.release_date
-            : detailsData.first_air_date,
-        type: locationArray[1],
-        user_id: auth?.currentUser?.uid,
-      });
-      
       try {
         await addDoc(savedCollectionRef, {
           title: detailsData.name || detailsData.title,
@@ -105,7 +104,7 @@ const DetailsHero = () => {
           user_id: auth?.currentUser?.uid,
         });
         console.log("Saved successfully");
-        getSavedMovies();
+        await getSavedMovies();
       } catch (err) {
         console.error("Error saving to Firebase:", err);
       }
@@ -120,7 +119,7 @@ const DetailsHero = () => {
         try {
           await deleteDoc(doc(db, "saved", thisMovie.id)); // Assuming "id" is the Firebase document ID
           console.log("Deleted successfully");
-          getSavedMovies(); 
+          await getSavedMovies(); 
         } catch (err) {
           console.error("Error deleting from Firebase:", err);
         }
@@ -132,6 +131,17 @@ const DetailsHero = () => {
   useEffect(()=>{
     console.log(saveState)
   },[])
+
+
+
+  // On play click:
+  const handlePlayClick = () => {
+    if (!trailerKey) {
+      toast.error("No trailer available!");
+      return;
+    }
+    setIsTrailerOpen(true);
+  };
   
 
   return (
@@ -172,11 +182,8 @@ const DetailsHero = () => {
 
           {/* Call to actions */}
           <div className="flexStart dh-buttons">
-            <span>
+            <span onClick={handlePlayClick}>
               <FaPlay size={15} />
-            </span>
-            <span>
-              <FaHeart size={15} />
             </span>
             <span onClick={onSaveClick}>
               {saveState== true? <FaBookmark size={17} /> : <FaRegBookmark size={17} />}
@@ -203,6 +210,7 @@ const DetailsHero = () => {
           </div>
         </div>
       </div>
+      <Trailer trailerKey={trailerKey} setTrailerKey={setTrailerKey} onClose={() => setIsTrailerOpen(false)} isTrailerOpen={isTrailerOpen}/>
     </div>
   );
 };

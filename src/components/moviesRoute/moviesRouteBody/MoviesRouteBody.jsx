@@ -7,7 +7,6 @@ const MoviesRouteBody = () => {
   return (
     <div className="d-body-wrapper">
       <div className="innerWidth paddings flexCenter d-body-container">
-        <div className=" d-body-filter"></div>
         <div className="d-body-right">
           <Genre call="routes"/>
           <MovieBody call="routes" />

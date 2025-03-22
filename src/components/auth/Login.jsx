@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { googleProvider } from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../hero/header/Navbar";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,16 +16,16 @@ const Login = () => {
     e.preventDefault();
     const currentUser = auth.currentUser; // This line should be inside the function
     if (currentUser) {
-      console.log("User is already logged in");
-      window.alert("Already logged in");
+      toast.error("Already logged in");
       return;
     }
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User logged in:", userCredential.user);
-      window.alert("Login Sucessfull")
+      toast.success("Login Sucessfull")
     } catch (error) {
       console.error("Error logging in:", error.message);
+      toast.error('Something went wrong')
     }
   };
   
@@ -32,14 +33,14 @@ const Login = () => {
     const currentUser = auth.currentUser;
     if (currentUser) {
       console.log("User is already logged in");
-      window.alert("Already logged in");
+      toast.error("Already logged in");
       return;
     }
     try {
       const result = await signInWithPopup(auth, googleProvider);
       if (result.user) {
         console.log("Login successful, showing alert");
-        window.alert("Login successful");
+        toast.success("Login Sucessfull")
         navigate(`/`)
       }
     } catch (error) {

@@ -8,7 +8,6 @@ const SeriesRoute = () => {
     <div>
       <div className="s-route-wrapper">
       <div className="innerWidth paddings flexCenter s-route-container">
-        <div className=" s-route-filter"></div>
         <div className="s-route-right">
           <Genre call="routes"/>
           <MovieBody call="routes" />
