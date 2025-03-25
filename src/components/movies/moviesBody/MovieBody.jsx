@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./movieBody.css";
-import { useMovieFetchContext } from "../../../contexts/movieFetchProvider";
+import { useMovieFetchContext } from "../../../contexts/MovieFetchProvider";
 import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
 import { useLocation } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import LoadingState from "@/components/ui/LoadingState";
 
 const MovieBody = (props) => {
   const {
@@ -28,6 +29,9 @@ const MovieBody = (props) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [lastSlide, setLastSlide]= useState(false);
   const navigate= useNavigate()
+
+  //For the loading state
+  const loadingArray= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
   const fetchAction = {
     Movies: { fetch: getHomeMovies, data: homeMovies },
@@ -130,11 +134,6 @@ const MovieBody = (props) => {
   }
   }
 
-  //Adding a loading state----------
-  if (!moviesRender || moviesRender.length === 0) {
-    return <div className="paddings">Loading...</div>; // Add a loading state
-  }
-
   return (
     <div
       className={`flexColStart mbody-wrapper ${
@@ -147,6 +146,11 @@ const MovieBody = (props) => {
           props.call == "routes" ? "routes" : ""
         }`}
       >
+        {(!moviesRender || moviesRender.length === 0) && (
+          loadingArray.map((each) => (
+            <LoadingState key={each} />
+          ))
+        )}
         {moviesRender.map((each) => {
           return (
             <div className="m-body-card" onClick={()=>onMovieClick(each.id)} key={each.id}>

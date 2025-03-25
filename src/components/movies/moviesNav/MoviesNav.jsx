@@ -15,8 +15,8 @@ const MoviesNav = () => {
 
   return (
     <div className="movies-wrapper">
-        <div className="paddings innerWidth movies-container">
-            <div className=" flexCenter movies-tab">
+        <div className="paddings innerWidth movies-container mb-[-10px]">
+            <div className=" flex items-center justify-around movies-tab">
             <div className={`movies ${moviesNavValue=="Movies" ? "active" : ""}`} onClick={()=> onMoviesNavClick("Movies") }>
                 <FaTv size={20} />
                 <span>Movies</span>

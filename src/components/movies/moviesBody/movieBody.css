@@ -6,7 +6,7 @@
   overflow-x: hidden;
   box-sizing: border-box;
   align-items: stretch; /* To make The elements fit the height of the row*/
-  padding-bottom: 10rem;
+  padding-bottom: 1rem;
   scrollbar-width: none;
 }
 .mbody-wrapper.routes{
@@ -33,6 +33,7 @@
   gap: 1rem;
   flex: 0 0 auto;
   box-sizing: border-box;
+  min-height: 18rem;
   height: 100%;
   transition: all 200ms ease-in;
   /* background: #100f14;

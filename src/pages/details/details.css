@@ -1,11 +1,14 @@
-.detailsBody{
-    align-items: start;
-    justify-content: space-between;
-}
-.db-left{
-    width: 70%;
-}
-.db-right{
-    width: 28%;
-    padding-top: 2.5rem;
+@media (max-width: 640px) {
+    .details-container {
+        flex-direction: column;
+    }
+    .movieAnalytics{
+        width: 100%;
+        margin-bottom: 2.5rem;
+        margin-top: -4rem;
+    }
+    .horizontals{
+        width: 100%;
+        max-width: 100%;
+    }
 }

@@ -16,29 +16,29 @@ const ShowDetails = () => {
   return (
     <div className="sd-wrapper">
       <div className="paddings flexColStart sd-container">
-        <div className="flexStart links">
-          <span>Instagram</span>
-          <span>Twitter</span>
-          <span>facebook</span>
+        <div className="flexStart links text-red-700 font-semibold ">
+          <span className="hover:text-black hover:cursor-pointer">Instagram</span>
+          <span className="hover:text-black hover:cursor-pointer">Twitter</span>
+          <span className="hover:text-black hover:cursor-pointer">facebook</span>
         </div>
         <div className="showItem">
-          <span>Status</span>
+          <span className="font-semibold">Status</span>
           <span>{detailsData.status}</span>
         </div>
         <div className="showItem">
-          <span>Original Language</span>
+          <span className="font-semibold">Original Language</span>
           <span>{detailsData.original_language}</span>
         </div>
         <div className="showItem">
-          <span>{locationArray[1]=='movie'? 'Budget' :'First air date'}</span>
+          <span className="font-semibold">{locationArray[1]=='movie'? 'Budget' :'First air date'}</span>
           <span>{locationArray[1]=='movie'? parseInt(detailsData?.budget)?.toLocaleString(): detailsData?.first_air_date}</span>
         </div>
         <div className="showItem">
-          <span>{locationArray[1]=='movie'? 'Revenue':'Last episode date'}</span>
+          <span className="font-semibold">{locationArray[1]=='movie'? 'Revenue':'Last episode date'}</span>
           <span>{locationArray[1]=='movie'? parseInt(detailsData?.revenue)?.toLocaleString(): detailsData?.last_air_date}</span>
         </div>
         <div className="key">
-          <span className="keyTitle">Keywords</span>
+          <span className="keyTitle font-semibold">Keywords</span>
           <div className=" flexStart keyContent">
             {detailsData?.genres?.map((each, index)=>{
               return <span className="keywordItem" key={index}>{each.name}</span>

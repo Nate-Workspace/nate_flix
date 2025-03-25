@@ -10,9 +10,10 @@ import { collection, deleteDoc,doc, addDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
 import {toast} from 'react-hot-toast'
 import Trailer from "../iframe/Trailer";
+import { ClipLoader } from "react-spinners";
 
-const DetailsHero = () => {
-  const { detailsData, getDetailsData, cast } = useMovieFetchContext();
+const DetailsHero = ({isLoading}) => {
+  const { detailsData, cast } = useMovieFetchContext();
   const [formattedGenres, setFormattedGenres] = useState([]);
   const location = useLocation();
   const navigate= useNavigate()
@@ -23,6 +24,7 @@ const DetailsHero = () => {
   // For the trailer
   const [trailerKey, setTrailerKey] = useState(null);
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+  const [isSaveLoading, setisSaveLoading]= useState(false)
 
   const locationArray= location.pathname.split('/');
 
@@ -84,11 +86,12 @@ const DetailsHero = () => {
       toast.error("You are not logged in!")
       return null
     }
+    
+    setisSaveLoading(true)
     const newSaveState = !saveState;
     setSaveState(newSaveState);
 
 
-    
     if (newSaveState) {
       try {
         await addDoc(savedCollectionRef, {
@@ -107,6 +110,8 @@ const DetailsHero = () => {
         await getSavedMovies();
       } catch (err) {
         console.error("Error saving to Firebase:", err);
+      }finally{
+        setisSaveLoading(false)
       }
     } else {
       const thisMovie = savedMovies.find(
@@ -122,6 +127,8 @@ const DetailsHero = () => {
           await getSavedMovies(); 
         } catch (err) {
           console.error("Error deleting from Firebase:", err);
+        }finally{
+          setisSaveLoading(false)
         }
       }
     }
@@ -145,14 +152,20 @@ const DetailsHero = () => {
   
 
   return (
-    <div className="dh-wrapper">
+    <div className={`dh-wrapper ${isSaveLoading ? "cursor-progress": ""}`}>
       <div className="flexStart paddings innerWidth dh-container">
         {/* Hero left */}
         <div className="dh-left">
-          <img
+          {isLoading && (
+            <div className="m-auto flex justify-center items-center"><ClipLoader className="m-auto" color="#36d7b7" size={50} /></div>
+          )}
+          {!isLoading && (
+            <img
             src={`https://image.tmdb.org/t/p/w500${poster_path}`}
             alt="movie poster"
           />
+          )}
+          
         </div>
 
         {/* Hero right */}

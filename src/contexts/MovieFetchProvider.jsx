@@ -103,30 +103,40 @@ export const MovieFetchProvider = ({ children }) => {
   };
 
   // Movie details page fetch
-  const getDetailsData= (pathname)=>{
-    fetch(
-      `https://api.themoviedb.org/3${pathname}?api_key=7d62e932694fb115cc96edfa471eaf1a`
-    )
-      .then((response) => response.json())
-      .then((data) => setDetailsData(data));
+  const getDetailsData= async (pathname)=>{
+    try {
+      const response= await fetch(`https://api.themoviedb.org/3${pathname}?api_key=${apiKey}`)
+      const data= await response.json();
+      setDetailsData(data)
+    } catch (error) {
+      console.error("Error fetching Details")
+    };
+    
   }
 
   // Details cast and crew
   const [movieId, setMovieId]=useState()
-  const getCast=(pathname)=>{
-    fetch(
-      `https://api.themoviedb.org/3${pathname}/credits?api_key=7d62e932694fb115cc96edfa471eaf1a`
-    )
-      .then((response) => response.json())
-      .then((data) => setCast(data));
+  const getCast= async (pathname)=>{
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3${pathname}/credits?api_key=${apiKey}`);
+      const data= await response.json();
+      setCast(data); 
+    } catch (error) {
+      console.error("Error fetching cast: ", error )
+    };
   }
 
   //Similar movies
-  const getSimilarMovies= (pathname)=>{
-    fetch(`https://api.themoviedb.org/3${pathname}/recommendations?api_key=7d62e932694fb115cc96edfa471eaf1a&language=en-US&page=1`)
-    .then(response=>response.json())
-    .then(data=> setSimilarMovies(data.results))
-  }
+  const getSimilarMovies = async (pathname) => {
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3${pathname}/recommendations?api_key=${apiKey}&language=en-US&page=1`);
+      const data = await response.json();
+      setSimilarMovies(data.results);
+    } catch (error) {
+      console.error("Error fetching similar movies:", error);
+    }
+  };
+  
 
   //SEARCH FUNCTIONALITY--------------------------------------
   const searchMovies = async (query) => {
@@ -168,12 +178,15 @@ export const MovieFetchProvider = ({ children }) => {
         genreIDsProvider,
         detailsData,
         getDetailsData,
+        setDetailsData,
         getCast,
+        setCast,
         cast,
         movieId,
         setMovieId,
         getSimilarMovies,
         similarMovies,
+        setSimilarMovies,
         searchMovies,
       }}
     >

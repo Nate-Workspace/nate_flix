@@ -1,19 +1,14 @@
-import React from "react";
-import { FaSearch } from "react-icons/fa";
-import SearchBar from "../../../separateComps/searchBar/SearchBar";
-
 const Herobody = () => {
   return (
     <div className="hero-wrapper h-full w-full flex ">
-      <div className="innerWidth flexColCenter z-10">
-        <div className="flexColCenter gap-4">
-          <div className="w-40 mb-4">
-            <img src="./NATEflix.png" alt="LOGO" className="w-60 md:w-80 lg:w-96 mb-4"/>
+      <div className="innerWidth flexColCenter -translate-y-16 z-10">
+        <div className="flexColCenter gap-8">
+          <div className="w-40 flex justify-center">
+            <span  className="font-bold lg:text-8xl md:text-7xl sm:text-6xl text-center flex"> <p>Nate</p> <p className="text-red-600">Flix</p></span>
           </div>
-          <div className="mt-2">
-            <p className="text-gray-300 text-lg max-w-md text-center">
-              Discover endless movies, TV shows, and more. Your next favorite
-              thing is just a click away.
+          <div className="">
+            <p className=" text-gray-200 max-w-xl text-center lg:text-xl md:text-lg sm:text-base font-extralight sm:px-2">
+              Discover endless <b className="text-red-500">movies, TV shows, and more.</b> You will never run out of movies to watch. A friendly movie recommendation system
             </p>
           </div>
         </div>

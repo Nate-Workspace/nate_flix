@@ -1,9 +1,9 @@
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import Parent from "./components/Parent";
-import MovieFetchProvider from "./contexts/movieFetchProvider";
+import MovieFetchProvider from "./contexts/MovieFetchProvider";
 import TrendsContextProvider from "./contexts/TrendsContextProvider";
+import Parent from "./components/Parent";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <MovieFetchProvider>
         <TrendsContextProvider>
         <Toaster />
-          <Parent />
+          <Parent/>
         </TrendsContextProvider>
       </MovieFetchProvider>
     </BrowserRouter>

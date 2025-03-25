@@ -14,14 +14,15 @@ import { auth } from '@/config/firebase'
 
 const Parent = () => {
     const isAuth= useMemo(()=> (!!auth?.currentUser?.uid),[auth?.currentUser?.uid] );
+    console.log(isAuth)
     
   return (
-    <div className="app">
+    <div className="app flex flex-col justify-between min-h-screen">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/movies" element={<Movies location={location.pathname}/>}/>
               <Route path="/series" element={<Series />} />
-              <Route path="/mylist" element={isAuth ? <MyList /> : <Login/>} />
+              <Route path="/mylist" element={<MyList />} />
               <Route path="/movie/:id" element={<Details/>} />
               <Route path="/tv/:id" element={<Details/>} />
     

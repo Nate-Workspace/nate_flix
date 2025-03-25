@@ -1,9 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
     darkMode: ["class"],
-    content: ["./src/**/*.{js,jsx,ts,tsx}"],
+    content: ["./src/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   theme: {
   	extend: {
+		screens: {
+			sm: "0px", // Small screens (make sure this exists!)
+			md: "768px",
+			lg: "1024px",
+			xl: "1280px",
+		  },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
@@ -51,7 +57,13 @@ export default {
   				'5': 'hsl(var(--chart-5))'
   			}
   		}
-  	}
+  	},
+	  screens: {
+		sm: "640px", // Small screens (make sure this exists!)
+		md: "768px",
+		lg: "1024px",
+		xl: "1280px",
+	  },
   },
   plugins: [require("tailwindcss-animate")],
 };

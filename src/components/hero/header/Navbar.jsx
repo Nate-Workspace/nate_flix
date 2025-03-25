@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { FaSearch } from "react-icons/fa";
 import "./navbar.css";
 import SearchBar from "../../../separateComps/searchBar/SearchBar";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -7,12 +6,32 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../config/firebase";
 import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
 import toast from "react-hot-toast";
+import { HiMenu } from "react-icons/hi";
+import SideBar from "@/components/ui/SideBar";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {setSaveState, setSavedMovies}= useTrendsContext()
+  const { setSaveState, setSavedMovies } = useTrendsContext();
   const [currentUser, setCurrentUser] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  //FOr scroll animation
+  const [isScrolled, setIsScrolled]= useState(false)
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY; // Get current scroll position
+      setIsScrolled(scrollTop > 300 ? true : scrollTop === 0 ? false : isScrolled);
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isScrolled]); // Depend on isScrolled to prevent unnecessary updates
+  
+  
+  //-----------------------------------
+
+
 
   useEffect(() => {
     // Listen to auth state changes
@@ -27,15 +46,18 @@ const Navbar = () => {
   const onNavClick = (active) => {
     if (active === "Home") {
       navigate("/");
-    } else if(active== "Mylist"){
-      if(!auth?.currentUser?.uid){
-        toast.error("You are not logged in!")
-        navigate("/login")
+    } else if (active == "Mylist") {
+      if (!auth?.currentUser?.uid) {
+        toast.error("You are not logged in!");
+        navigate("/login");
+      } else {
+        navigate("/mylist");
       }
-    } 
-    else {
+    } else {
       navigate(`/${active.toLowerCase()}`);
     }
+
+    setIsOpen(false);
   };
 
   const onLogin = (active) => {
@@ -49,85 +71,95 @@ const Navbar = () => {
   const onLogOut = async () => {
     try {
       await signOut(auth);
-      setSaveState(false); 
+      setSaveState(false);
       setSavedMovies([]);
-      toast.success("You have successfully logged out.");
+      toast("You have logged out.");
     } catch (e) {
       console.error("Error during logout:", e);
-      toast.error("Something went wrong")
+      toast.error("Something went wrong");
     }
   };
 
   return (
-    <div className="w-full flex flex-col nav-wrapper">
-      <div className="innerWidth paddings flexStart nav-container">
-        <div className="nav-logo">
-          <img
-            src="/NATEflix.png"
-            alt="logo"
-            onClick={() => onNavClick("Home")}
-          />
-        </div>
-        <div className="flexBetween nav-right">
-          {/* Navigation buttons */}
-          <div className="nav-middle">
-            <span
-              onClick={() => onNavClick("Home")}
-              className={`${location.pathname === "/" ? "active" : ""}`}
-            >
-              Home
-            </span>
-            <span
-              onClick={() => onNavClick("Movies")}
-              className={`${location.pathname === "/movies" ? "active" : ""}`}
-            >
-              Movies
-            </span>
-            <span
-              onClick={() => onNavClick("Series")}
-              className={`${location.pathname === "/series" ? "active" : ""}`}
-            >
-              Series
-            </span>
-            <span
-              onClick={() => onNavClick("Mylist")}
-              className={`${location.pathname === "/mylist" ? "active" : ""}`}
-            >
-              My list
-            </span>
-          </div>
+    <>
+      {isOpen && (
+        <SideBar
+          onLogin={onLogin}
+          onNavClick={onNavClick}
+          onLogOut={onLogOut}
+          currentUser={currentUser}
+          auth={auth}
+          isOpen={() => setIsOpen(false)}
+        />
+      )}
 
-          <SearchBar />
-          <div className="auth-buttons flex gap-2">
-            {!currentUser && !auth.currentUser && (
-              <>
-                <div
-                  className="red-button"
-                  onClick={() => onLogin("Login")}
-                >
-                  Login
-                </div>
-                <div
-                  className="gray-button bg-gray-500"
-                  onClick={() => onLogin("Sign Up")}
-                >
-                  Sign up
-                </div>
-              </>
-            )}
-            {currentUser && auth.currentUser &&(
-              <div
-                className="gray-button bg-gray-500"
-                onClick={onLogOut}
+      <div className={`w-full flex flex-col nav-wrapper ${isScrolled ? 'fixed top-0 left-0 bg-black z-40 ' : ''} transition-all ease-in duration-300`}>
+        <div className="innerWidth paddings flexStart nav-container flex">
+          <div className="nav-logo">
+          <span  className="font-bold lg:text-3xl md:text-2xl sm:text-1xl text-center flex"> <p>Nate</p> <p className="text-red-600">Flix</p></span>
+          </div>
+          <div className="flexBetween nav-right lg:gap-12 md:gap-6">
+            {/* Navigation buttons */}
+            <div className="nav-middle flex md:gap-8 lg:gap-12">
+              <span
+                onClick={() => onNavClick("Home")}
+                className={`${location.pathname === "/" ? "active" : ""}`}
               >
-                Log out
-              </div>
-            )}
+                Home
+              </span>
+              <span
+                onClick={() => onNavClick("Movies")}
+                className={`${location.pathname === "/movies" ? "active" : ""}`}
+              >
+                Movies
+              </span>
+              <span
+                onClick={() => onNavClick("Series")}
+                className={`${location.pathname === "/series" ? "active" : ""}`}
+              >
+                Series
+              </span>
+              <span
+                onClick={() => onNavClick("Mylist")}
+                className={`${location.pathname === "/mylist" ? "active" : ""}`}
+              >
+                My list
+              </span>
+            </div>
+
+            <SearchBar />
+            <div className="auth-buttons flex lg:gap-2 md:gap-1">
+              {!currentUser && !auth.currentUser && (
+                <>
+                  <div className="red-button" onClick={() => onLogin("Login")}>
+                    Login
+                  </div>
+                  <div
+                    className="gray-button bg-gray-500"
+                    onClick={() => onLogin("Sign Up")}
+                  >
+                    Sign up
+                  </div>
+                </>
+              )}
+              {currentUser && auth.currentUser && (
+                <div className="gray-button bg-gray-500" onClick={onLogOut}>
+                  Log out
+                </div>
+              )}
+            </div>
           </div>
         </div>
+
+        <div className="innerWidth paddings flex items-center justify-between sideBar-container">
+          <div className="hover:cursor-pointer" onClick={() => setIsOpen(true)}>
+            <HiMenu size={30} />
+          </div>
+          <SearchBar />
+        </div>
+        <hr className={`${isScrolled ? "hidden" : ""}`}/>
       </div>
-      <hr />
-    </div>
+    </>
   );
 };
 

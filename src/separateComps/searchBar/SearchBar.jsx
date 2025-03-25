@@ -49,7 +49,7 @@ const SearchBar = () => {
   console.log(searchResults)
 
   return (
-    <div className="relative w-full max-w-md">
+    <div className="relative xl:w-full lg:max-w-md md:max-w-sm z-20">
       {/* Search Input */}
       <div className="flex items-center bg-gray-800 text-white rounded-full px-4 py-2 w-full">
         <FaSearch size={15} className="text-gray-400" />
@@ -65,7 +65,7 @@ const SearchBar = () => {
 
       {/* Search Results Dropdown */}
       {searchResults.length > 0 && (
-        <ul className="absolute left-0 w-full mt-3 bg-gray-900 text-white rounded-lg shadow-lg max-h-96 overflow-y-auto">
+        <ul className="absolute left-0 w-full mt-3 bg-gray-900 text-white rounded-lg shadow-lg max-h-96 overflow-y-auto z-20">
           {searchResults.map((movie) => (
             <li
               key={movie.id}

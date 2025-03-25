@@ -1,6 +1,6 @@
 .nav-container{
     justify-content: space-between;
-    z-index: 5;
+    z-index: 50;
     padding: 1rem 1rem .7rem;
 }
 .nav-logo img:hover{
@@ -9,7 +9,6 @@
 .nav-right{
     flex: 1;
     justify-content: flex-end;
-    gap: 3rem;
 }
 
 /* Nav middle--------------------- */
@@ -17,7 +16,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
 }
 .nav-middle span{
     font-size: 1.05rem;
@@ -59,7 +57,7 @@
     width: 100%;
     border-color: var(--secondary);
     position: relative;
-    z-index: 5;
+    z-index: 40;
 }
 .gray-button{
     padding: 0.2rem 1rem;
@@ -74,4 +72,25 @@
 .gray-button:hover{
     cursor: pointer;
     scale: 1.03;
+}
+
+
+@media (max-width: 1055px) {
+    .nav-container{
+        display: none;
+    }
+    .sideBar-container{
+        display: flex;
+        padding: 1rem 1rem .7rem;
+        z-index: 40;
+    }
+}
+@media (min-width: 1056px) {
+    .sideBar-container{
+        display: none;
+        z-index: 40;
+    }
+    .side-body{
+        display: none;
+    }
 }

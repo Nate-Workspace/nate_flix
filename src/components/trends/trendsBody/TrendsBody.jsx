@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./trendsBody.css";
-import { useMovieFetchContext } from "../../../contexts/movieFetchProvider";
+import { useMovieFetchContext } from "../../../contexts/MovieFetchProvider";
 import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
 import { useNavigate } from "react-router-dom";
+import LoadingState from "@/components/ui/LoadingState";
 
 const TrendsBody = () => {
-  const {trendingMovies, getTrendingMovies, popularMovies, getPopularMovies, upcomingMovies, getUpcomingMovies,topRatedMovies, getTopRatedMovies}= useMovieFetchContext()
-  const {trendsNavValue}= useTrendsContext()
-  const [trendsRender, setTrendsRender]= useState([])
-  const navigate= useNavigate();
+  const {
+    trendingMovies,
+    getTrendingMovies,
+    popularMovies,
+    getPopularMovies,
+    upcomingMovies,
+    getUpcomingMovies,
+    topRatedMovies,
+    getTopRatedMovies,
+  } = useMovieFetchContext();
+  const { trendsNavValue } = useTrendsContext();
+  const [trendsRender, setTrendsRender] = useState([]);
+  const navigate = useNavigate();
+
+  const loadingArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
   //Fetching and setting the value for the Horisontal slider
   const fetchActions = {
@@ -28,40 +40,56 @@ const TrendsBody = () => {
     if (action.data.length > 0) {
       setTrendsRender(action.data);
     }
-  }, [trendsNavValue, trendingMovies, popularMovies, topRatedMovies, upcomingMovies]);
+  }, [
+    trendsNavValue,
+    trendingMovies,
+    popularMovies,
+    topRatedMovies,
+    upcomingMovies,
+  ]);
 
   //-----------------------------------------------
 
-
   // On movie click----------------------------
-  const onMovieClick=(id)=>{
-    navigate(`/movie/${id}`)
-  }
-  
-  if (!trendsRender || trendsRender.length === 0) {
-    return <div>Loading...</div>; // Add a loading state
-  }
+  const onMovieClick = (id) => {
+    navigate(`/movie/${id}`);
+  };
+
+
+
   return (
     <div className=" flexCenter tbody-wrapper">
       <div className="paddings tbody-container">
+        {(!trendsRender || trendsRender.length === 0) && (
+          loadingArray.map((each) => (
+            <LoadingState key={each}/>
+          ))
+        )}
         {trendsRender.map((each) => {
-          return(
-          <div className="tbody-card" onClick={()=>onMovieClick(each.id)} key={each.id}>
-            <div className="cardImage">
-              <img src={`https://image.tmdb.org/t/p/w500${each.poster_path}`} alt="movie" />
-            </div>
+          return (
+            <div
+              className="tbody-card"
+              onClick={() => onMovieClick(each.id)}
+              key={each.id}
+            >
+              <div className="cardImage">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${each.poster_path}`}
+                  alt="movie"
+                />
+              </div>
 
-            <div className="cardDetails">
-              <div className="titles cardTitle">{each.title}</div>
-              <div className="flexBetween cardDetailsMini">
-                <div className="secondaryText releaseDate">
-                  {each.release_date}
+              <div className="cardDetails">
+                <div className="titles cardTitle">{each.title}</div>
+                <div className="flexBetween cardDetailsMini">
+                  <div className="secondaryText releaseDate">
+                    {each.release_date}
+                  </div>
+                  <div className="rating">{each.vote_average}</div>
                 </div>
-                <div className="rating">{each.vote_average}</div>
               </div>
             </div>
-          </div>
-          )
+          );
         })}
       </div>
     </div>
@@ -69,37 +97,3 @@ const TrendsBody = () => {
 };
 
 export default TrendsBody;
-
-
-
-// useEffect(()=>{
-  //   console.log(trendsNavValue)
-  //   if(trendsNavValue=="Trending"){
-  //     getTrendingMovies()
-  //   }
-  //   else if(trendsNavValue== "Popular"){
-  //     getPopularMovies()
-  //   }
-  //   else if( trendsNavValue=="TopRated"){
-  //     getTopRatedMovies()
-  //   }
-  //   else if(trendsNavValue== "Upcoming"){
-  //     getUpcomingMovies()
-  //   }else{
-  //     getTrendingMovies()
-  //   }
-  // },[trendsNavValue])
-
-  // //  Setting the trendsREnder
-
-  // useEffect(() => {
-  //   if (trendsNavValue === "Trending" && trendingMovies.length > 0) {
-  //     setTrendsRender(trendingMovies);
-  //   } else if (trendsNavValue === "Popular" && popularMovies.length > 0) {
-  //     setTrendsRender(popularMovies);
-  //   } else if (trendsNavValue === "TopRated" && topRatedMovies.length > 0) {
-  //     setTrendsRender(topRatedMovies);
-  //   } else if (trendsNavValue === "Upcoming" && upcomingMovies.length > 0) {
-  //     setTrendsRender(upcomingMovies);
-  //   }
-  // }, [trendsNavValue, trendingMovies, popularMovies, topRatedMovies, upcomingMovies]);

@@ -14,5 +14,10 @@
 .f-navigation a{
     font-size: .9rem;
     font-weight: 600;
+    transition: ease-in all 200ms;
+}
+.f-navigation a:hover{
+    color: var(--red);
+    cursor: pointer;
 }
 

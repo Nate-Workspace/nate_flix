@@ -3,8 +3,10 @@
     width: 100%;
     color: black;
     gap: 1.5rem;
+    flex-wrap: wrap;
 }
 .links{
+    flex-wrap: wrap;
     gap: 1.5rem;
 }
 .showItem{
