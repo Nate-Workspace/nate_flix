@@ -34,11 +34,13 @@ const DhWrapped = () => {
 
   return (
     <div className="wrapper-hero">
-      <img
+      {!isLoading && (
+        <img
         src={`https://image.tmdb.org/t/p/w500${detailsData?.backdrop_path}`}
         className="dh-image"
         alt=""
       />
+      )}   
       <div className="dh-shadow"></div>
       <Navbar />
       <DetailsHero isLoading={isLoading} />
