@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import "./showDetails.css";
-import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
+import "./showDetails.css";
 
 const ShowDetails = () => {
   const {detailsData, getDetailsData}= useMovieFetchContext()

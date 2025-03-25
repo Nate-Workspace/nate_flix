@@ -1,7 +1,6 @@
-import React from "react";
-import "./moviesRouteBody.css";
 import MovieBody from "../../movies/moviesBody/MovieBody";
 import Genre from "../../trends/genre/Genre";
+import "./moviesRouteBody.css";
 
 const MoviesRouteBody = () => {
   return (

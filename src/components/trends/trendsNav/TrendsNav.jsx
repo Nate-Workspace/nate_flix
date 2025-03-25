@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { Fa42Group, FaArrowTrendUp, FaFire, FaPlus } from "react-icons/fa6";
 import "./trendsNav.css";
-import { FaArrowTrendUp, FaFire, FaPlus, Fa42Group } from "react-icons/fa6";
 
 import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
 

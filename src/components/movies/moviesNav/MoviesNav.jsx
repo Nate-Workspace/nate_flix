@@ -1,8 +1,6 @@
-import React from 'react'
-import "./moviesNav.css"
-import { FaTv , FaFilm } from 'react-icons/fa'
+import { FaFilm, FaTv } from 'react-icons/fa'
 import { useTrendsContext } from '../../../contexts/TrendsContextProvider'
-import Genre from '../../trends/genre/Genre'
+import "./moviesNav.css"
 
 const MoviesNav = () => {
 

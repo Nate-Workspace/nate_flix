@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "./recomended.css";
-import { mockData } from "../../assets/mockData";
-import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import LoadingState from "../ui/LoadingState";
-import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
+import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
+import "./recomended.css";
 
 const Recomended = () => {
   const {

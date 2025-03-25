@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { useLocation } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
 import "./peopleHorisontal.css";
-import { ClipLoader } from "react-spinners";
 
 const PeopleHorisontal = () => {
   const { cast, getCast, setCast } = useMovieFetchContext();

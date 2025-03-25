@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import "./hero.css";
-import Navbar from "./header/Navbar";
-import Herobody from "./herobody/Herobody";
-import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
+import Navbar from "./header/Navbar";
+import "./hero.css";
+import Herobody from "./herobody/Herobody";
 
 const Hero = () => {
   const [heroImage,setHeroImage]=useState(null)

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import "./trendsBody.css";
+import LoadingState from "@/components/ui/LoadingState";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useMovieFetchContext } from "../../../contexts/MovieFetchProvider";
 import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
-import { useNavigate } from "react-router-dom";
-import LoadingState from "@/components/ui/LoadingState";
+import "./trendsBody.css";
 
 const TrendsBody = () => {
   const {

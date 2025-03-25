@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "./genre.css";
-import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
-import { useMovieFetchContext } from "../../../contexts/MovieFetchProvider";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useMovieFetchContext } from "../../../contexts/MovieFetchProvider";
+import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
+import "./genre.css";
 // import { Result } from "postcss";
 //THERE IS A BUG HERE IN THE CSS!!!!!!!!!!!!!!!!!!--------------------
 

@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
 import DhWrapped from "../../components/detailsHero/DhWrapped";
 import PeopleHorisontal from "../../components/peopleHorisontal/PeopleHorisontal";
-import ShowDetails from "../../components/showDetails/ShowDetails";
 import Recomended from "../../components/recomended/Recomended";
-import "./details.css"
+import ShowDetails from "../../components/showDetails/ShowDetails";
+import "./details.css";
 const Details = () => {
   return (
     <div className="details-wrapper">

@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import "./navbar.css";
-import SearchBar from "../../../separateComps/searchBar/SearchBar";
-import { useNavigate, useLocation } from "react-router-dom";
-import { signOut, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../../config/firebase";
-import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
+import SideBar from "@/components/ui/SideBar";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { HiMenu } from "react-icons/hi";
-import SideBar from "@/components/ui/SideBar";
+import { useLocation, useNavigate } from "react-router-dom";
+import { auth } from "../../../config/firebase";
+import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
+import SearchBar from "../../../separateComps/searchBar/SearchBar";
+import "./navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();

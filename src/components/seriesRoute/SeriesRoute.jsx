@@ -1,7 +1,6 @@
-import React from 'react'
-import "./seriesRoute.css"
-import Genre from '../trends/genre/Genre'
 import MovieBody from '../movies/moviesBody/MovieBody'
+import Genre from '../trends/genre/Genre'
+import "./seriesRoute.css"
 
 const SeriesRoute = () => {
   return (

@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
-import "./detailsHero.css";
-import { FaHeart } from "react-icons/fa";
-import { FaBookmark,FaRegBookmark } from "react-icons/fa";
-import { FaPlay } from "react-icons/fa";
+import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { toast } from 'react-hot-toast';
+import { FaBookmark, FaPlay, FaRegBookmark } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
+import { auth, db } from "../../config/firebase";
 import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
 import { useTrendsContext } from "../../contexts/TrendsContextProvider";
-import { collection, deleteDoc,doc, addDoc } from "firebase/firestore";
-import { auth, db } from "../../config/firebase";
-import {toast} from 'react-hot-toast'
 import Trailer from "../iframe/Trailer";
-import { ClipLoader } from "react-spinners";
+import "./detailsHero.css";
 
 const DetailsHero = ({isLoading}) => {
   const { detailsData, cast } = useMovieFetchContext();

@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { auth } from "../../config/firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { googleProvider } from "../../config/firebase";
-import { useNavigate } from "react-router-dom";
-import Navbar from "../hero/header/Navbar";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
+import { auth, googleProvider } from "../../config/firebase";
+import Navbar from "../hero/header/Navbar";
 
 const Login = () => {
   const [email, setEmail] = useState("");

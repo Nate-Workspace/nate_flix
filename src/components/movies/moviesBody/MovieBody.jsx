@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import "./movieBody.css";
+import LoadingState from "@/components/ui/LoadingState";
+import { useEffect, useState } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useMovieFetchContext } from "../../../contexts/MovieFetchProvider";
 import { useTrendsContext } from "../../../contexts/TrendsContextProvider";
-import { useLocation } from "react-router-dom";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import LoadingState from "@/components/ui/LoadingState";
+import "./movieBody.css";
 
 const MovieBody = (props) => {
   const {

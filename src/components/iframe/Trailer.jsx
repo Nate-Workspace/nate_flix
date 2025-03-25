@@ -1,6 +1,6 @@
 import { useMovieFetchContext } from '@/contexts/MovieFetchProvider';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
 
 
 const API_KEY = "7d62e932694fb115cc96edfa471eaf1a";

@@ -1,6 +1,5 @@
-import React from "react";
-import "./moviesSort.css";
 import { useTrendsContext } from "@/contexts/TrendsContextProvider";
+import "./moviesSort.css";
 
 const MoviesSort = () => {
   const { moviesNavValue, setMoviesNavValue } = useTrendsContext();

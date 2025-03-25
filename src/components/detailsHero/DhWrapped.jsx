@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import DetailsHero from "./DetailsHero";
-import "./DhWrapped.css";
-import Navbar from "../hero/header/Navbar";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useMovieFetchContext } from "../../contexts/MovieFetchProvider";
+import Navbar from "../hero/header/Navbar";
+import DetailsHero from "./DetailsHero";
+import "./DhWrapped.css";
 
 const DhWrapped = () => {
   const location = useLocation();
@@ -41,7 +41,7 @@ const DhWrapped = () => {
       />
       <div className="dh-shadow"></div>
       <Navbar />
-      <DetailsHero isLoading={isLoading}/>
+      <DetailsHero isLoading={isLoading} />
     </div>
   );
 };

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import Navbar from "../hero/header/Navbar";
-import { auth, googleProvider } from "../../config/firebase";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
+import { auth, googleProvider } from "../../config/firebase";
+import Navbar from "../hero/header/Navbar";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
